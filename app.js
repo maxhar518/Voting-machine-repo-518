@@ -14,11 +14,11 @@ const loopHandler = () => {
     for (let item of membersData) {
         container.innerHTML +=
             `
-            <span>${item.name}</span>
+            <span>${item.name} </span>
             <span> vote: ${item.vote}</span>
-            <button onclick="voteHandler(${i})" >Increase Vote</button>
-            <button onclick="edit(this)">Edit</button>
-            <button onclick="del(this)">Delete</button><br>
+            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="voteHandler(${i})" >Increase Vote</button>
+            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="edit(this)">Edit</button>
+            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="del(this)">Delete</button><br>
             </br></br>
              `
              if(item.vote > highestVote){
