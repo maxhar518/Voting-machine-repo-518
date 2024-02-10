@@ -17,8 +17,8 @@ const loopHandler = () => {
             <span>${item.name} </span>
             <span> vote: ${item.vote}</span>
             <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="voteHandler(${i})" >Increase Vote</button>
-            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="edit(this)">Edit</button>
-            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="del(this)">Delete</button><br>
+            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="edit(${i})">Edit</button>
+            <button class="ml-2 p-3 border rounded-md bg-red-600 text-white" onclick="del(${i})">Delete</button><br>
             </br></br>
              `
              if(item.vote > highestVote){
@@ -43,8 +43,17 @@ const voteHandler = (index) => {
 
 
 const submitHandler = () => {
+    const newmemberName = memberInput.value.trim()
+
+    if (!newmemberName) {
+        alert("please Enter name")
+    }
+    if (membersData.some(member => member.name.toLowerCase() === newmemberName.toLowerCase())) {
+       alert('Cannot add Same Name')
+       return; 
+    }
     const member = {
-        name: memberInput.value,
+        name: newmemberName,
         vote: 0
     }
     membersData.push(member)
@@ -55,15 +64,17 @@ const submitHandler = () => {
     loopHandler()
 }
 
+
+function edit(index){
+    var newname = prompt("Enter Value To Update");
+    if (newname !== null) {
+        membersData[index].name = newname;
+        loopHandler()
+    }
+}
+
+function del(i){
+    membersData.splice(i,1)
+    loopHandler();
+}
 loopHandler()
-
-function edit(e){
-    // console.log(e.parentNode.firstElementChild.textContent);
- 
-    var a = prompt("Enter Value To Update", e.parentNode.firstElementChild.textContent);
-    e.parentNode.firstElementChild.textContent =a;
-}
-
-function del(e){
-    e.parentNode.remove()
-}
